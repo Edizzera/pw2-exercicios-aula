@@ -1,31 +1,24 @@
 package edu.ifrs;
 
-public class Invoice {
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Invoice extends PanacheEntity{
+
+    @NotEmpty
     private String cardNumber;
     private String value;
     private boolean payment;
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-    public String getValue() {
-        return value;
-    }
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public boolean isPayment() {
-        return payment;
-    }
-    public void setPayment(boolean payment) {
-        this.payment = payment;
-    }
-
-    
+  
     
 }
