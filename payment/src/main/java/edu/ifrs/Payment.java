@@ -15,7 +15,7 @@ public class Payment {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("User")
+    // @RolesAllowed("User")
     @Transactional
     public Invoice confirmPayment(
         @FormParam("cardNumber") String cardNumber,    
