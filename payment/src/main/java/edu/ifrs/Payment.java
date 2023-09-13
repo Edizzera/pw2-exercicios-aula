@@ -1,6 +1,7 @@
 package edu.ifrs;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.FormParam;
@@ -12,6 +13,9 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/payment")
 public class Payment {
 
+    @Inject
+    InvoiceRepository invoiceRepository;
+
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
@@ -22,7 +26,8 @@ public class Payment {
         @FormParam("value") String value) {
             Invoice invoice = new Invoice(cardNumber, value, true);
             // Persist the invoice method
-            invoice.persist();
+            //invoice.persist();
+            invoiceRepository.persist(invoice);
             return invoice;
     }
 
