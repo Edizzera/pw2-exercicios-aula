@@ -1,10 +1,13 @@
 package edu.ifrs;
 
+import java.util.List;
+
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -19,7 +22,7 @@ public class Payment {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-    // @RolesAllowed("User")
+    @RolesAllowed("User")
     @Transactional
     public Invoice confirmPayment(
         @FormParam("cardNumber") String cardNumber,    
@@ -29,6 +32,15 @@ public class Payment {
             //invoice.persist();
             invoiceRepository.persist(invoice);
             return invoice;
+    }
+
+    @GET
+    @Path("/invoices")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("User")
+    public List<Invoice> list() {
+        return invoiceRepository.listAll();
     }
 
 }
